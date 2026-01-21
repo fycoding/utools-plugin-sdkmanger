@@ -1,0 +1,17 @@
+{
+  "main": "index.html",
+  "preload": "preload/services.js",
+  "logo": "logo.png",
+  "development": {
+    "main": "http://localhost:5173"
+  },
+  "features": [
+    {
+      "code": "java",
+      "explain": "java sdk管理",
+      "cmds": [
+        "java"
+      ]
+    }
+  ]
+}
