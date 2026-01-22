@@ -1,37 +1,34 @@
 <script lang="ts" setup>
-import { watch } from 'vue';
+import { onMounted, ref } from 'vue';
+import VersionList from "../../components/list/Index.vue"
 
-const props = defineProps({
-  enterAction: {
-    type: Object,
-    required: true
-  }
-})
+let sdkPath = ref('');
+const versionList = ref([
+  {
+    version: '3.38.7',
+    downloadUrl: 'https://storage.flutter-io.cn/flutter_infra_release/releases/stable/windows/flutter_windows_3.38.7-stable.zip'
+  },
+  {
+    version: '3.27.1',
+    downloadUrl: 'https://storage.flutter-io.cn/flutter_infra_release/releases/stable/windows/flutter_windows_3.27.1-stable.zip'
+  },
+]);
 
-watch(() => props.enterAction, (enterAction) => {
-  let outputPath;
-  try {
-    if (enterAction.type === "over") {
-      outputPath = window.services.writeTextFile(enterAction.payload);
-    } else if (enterAction.type === "img") {
-      outputPath = window.services.writeImageFile(enterAction.payload);
-    }
-  } catch (err) {
-    // 写入错误弹出通知
-    window.utools.showNotification("文件保存出错了！");
-  }
-  if (outputPath) {
-    // 在资源管理器中显示
-    window.utools.shellShowItemInFolder(outputPath);
-  }
-  // 退出插件应用
-  // window.utools.outPlugin();
-}, {
-  immediate: true
-})
+
+onMounted(() => {
+  const config = window.services.getConfig();
+  sdkPath.value = `${config.sdkPath}\\flutter`;
+});
+
 
 </script>
 
 <template>
-  <div></div>
+  <VersionList homeEnv="FLUTTER_HOME" :sdkPath="sdkPath" :versionList="versionList"></VersionList>
 </template>
+
+<style>
+.hello {
+  padding: 10px 28px;
+}
+</style>

@@ -25,26 +25,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import VersionItem from './VersionItem.vue'
-
+const props = defineProps({
+    sdkPath: {
+        type: String,
+        required: true
+    },
+    versionList: {
+        type: Array,
+        required: true,
+    },
+    homeEnv: {
+        type: String,
+        required: true
+    }
+});
 let msg = ref("-");
 const currentVersion = "";
-// 模拟数据
-const versionList = ref([
-    { version: '8', downloadUrl: 'https://d10.injdk.cn/openjdk/openjdk/8/openjdk-8u41-b04-windows-i586-14_jan_2020.zip' },
-    { version: '11', downloadUrl: 'https://d10.injdk.cn/openjdk/openjdk/11/openjdk-11+28_windows-x64_bin.zip' },
-    { version: '25', downloadUrl: 'https://d10.injdk.cn/openjdk/openjdk/25/openjdk-25_windows-x64_bin.zip' },
-]);
-const saveToPath = window.utools.getPath('downloads');
-
+const emit = defineEmits(['switch'])
 const services = window.services;
-const env = services.env;
+const env = window.services.env;
+const path = window.services.path;
+
+onMounted(() => {
+    console.log(props);
+});
 
 // 处理下载事件
 const handleDownload = async (item) => {
-    const versionPath = `${saveToPath + services.path.sep + item.version}`;
-    if(services.path.existsSync(versionPath)) {
+    if (!services.path.existsSync(props.sdkPath)) {
+        services.path.mkdir(props.sdkPath)
+    }
+    const versionPath = `${props.sdkPath + services.path.sep + item.version}`;
+    if (services.path.existsSync(versionPath)) {
         setMsg(`当前版本:${item.version}已存在:${versionPath}`);
         return;
     }
@@ -68,9 +82,21 @@ const setMsg = (txt) => {
 
 // 处理切换事件
 const handleSwitch = async (item) => {
-    console.log('切换到版本:', item)
-    let ret = await env.get('FLUTTER_HOME');
-    console.log(ret);
+    const version = item.version;
+    const homeEnv = props.homeEnv;
+    const sdkPath = props.sdkPath;
+    const linkPath = `${sdkPath}\\current`;
+    const target = `${sdkPath}\\${version}`;
+    if (!path.existsSync(target)) {
+        setMsg("请先下载");
+        return;
+    }
+    // 创建链接
+    path.createLink(target, linkPath);
+    // 设置环境变量
+    env.setx(homeEnv, linkPath);
+    env.addPath(`%${homeEnv}%\\bin`);
+    setMsg("切换成功");
 }
 </script>
 

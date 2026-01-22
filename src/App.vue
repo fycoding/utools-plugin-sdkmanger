@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import Java from "./pages/Java/index.vue";
 import Dart from "./pages/Dart/index.vue";
 import Flutter from "./pages/Flutter/index.vue";
+import Index from "./pages/Index/index.vue";
 
 const route = ref('')
 const enterAction = ref({})
@@ -19,6 +20,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <template v-if="route === 'index'">
+    <Index :enterAction="enterAction"></Index>
+  </template>
   <template v-if="route === 'java'">
     <Java :enterAction="enterAction"></Java>
   </template>

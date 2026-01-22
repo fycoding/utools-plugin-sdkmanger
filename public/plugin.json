@@ -7,10 +7,31 @@
   },
   "features": [
     {
+      "code": "index",
+      "explain": "SDK管理管理工具配置页面",
+      "cmds": [
+        "sdkmanager"
+      ]
+    },
+    {
       "code": "java",
       "explain": "java sdk管理",
       "cmds": [
         "java"
+      ]
+    },
+    {
+      "code": "dart",
+      "explain": "dart sdk管理",
+      "cmds": [
+        "dart"
+      ]
+    },
+    {
+      "code": "flutter",
+      "explain": "flutter sdk管理",
+      "cmds": [
+        "flutter"
       ]
     }
   ]
