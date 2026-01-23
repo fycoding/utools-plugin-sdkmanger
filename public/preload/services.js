@@ -82,6 +82,7 @@ window.services = {
     await flattenSingleSubfolder(withoutExtension);
   },
   openDirectoryDialog() {
+    alert("hhhh")
     let dirs =  window.utools.showOpenDialog({
       properties: ['openDirectory']
     });
