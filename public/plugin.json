@@ -33,6 +33,13 @@
       "cmds": [
         "flutter"
       ]
+    },
+    {
+      "code": "android",
+      "explain": "android sdk管理",
+      "cmds": [
+        "android"
+      ]
     }
   ]
 }

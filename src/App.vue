@@ -4,6 +4,7 @@ import Java from "./pages/Java/index.vue";
 import Dart from "./pages/Dart/index.vue";
 import Flutter from "./pages/Flutter/index.vue";
 import Index from "./pages/Index/index.vue";
+import Android from "./pages/Android/index.vue";
 
 const route = ref('')
 const enterAction = ref({})
@@ -20,6 +21,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <template v-if="route === 'android'">
+    <Android :enterAction="enterAction"></Android>
+  </template>
   <template v-if="route === 'index'">
     <Index :enterAction="enterAction"></Index>
   </template>

@@ -10,7 +10,6 @@ const open = async () => {
 }
 onMounted(() => {
     const config = window.services.getConfig();
-    console.log(config);
     if (config) {
         sdkPath.value = config.sdkPath;
     }

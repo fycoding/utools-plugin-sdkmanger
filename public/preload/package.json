@@ -1,3 +1,7 @@
 {
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "compressing": "^2.0.0",
+    "regedit": "^5.1.4"
+  }
 }
