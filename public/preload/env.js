@@ -1,6 +1,6 @@
 const regedit = require('regedit').promisified;
 
-const envKey = "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment";
+const envKey = "HKCU\\Environment";
 
 const env = {
     /**

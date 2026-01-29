@@ -15,7 +15,7 @@ window.services = {
       if(fs.existsSync(linkPath)) {
         fs.unlinkSync(linkPath);
       }
-      fs.symlinkSync(target, linkPath);
+      fs.symlinkSync(target, linkPath, 'junction');
     },
     mkdir: fs.mkdirSync
   },
