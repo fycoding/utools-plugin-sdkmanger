@@ -9,6 +9,10 @@ const versionList = ref([
     downloadUrl: 'https://storage.flutter-io.cn/flutter_infra_release/releases/stable/windows/flutter_windows_3.38.7-stable.zip'
   },
   {
+    version: '3.35.7',
+    downloadUrl: 'https://storage.flutter-io.cn/flutter_infra_release/releases/stable/windows/flutter_windows_3.35.7-stable.zip'
+  },
+  {
     version: '3.27.1',
     downloadUrl: 'https://storage.flutter-io.cn/flutter_infra_release/releases/stable/windows/flutter_windows_3.27.1-stable.zip'
   },
